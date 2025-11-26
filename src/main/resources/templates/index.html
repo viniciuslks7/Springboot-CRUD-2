@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oficina3D — Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="w-full max-w-xl bg-white rounded-xl shadow-lg p-10 text-center">
+    <h1 class="text-3xl font-bold text-sky-600 mb-6">Oficina3D</h1>
+    <p class="mb-6 text-gray-700">Bem-vindo — escolha uma opção:</p>
+
+    <div class="flex gap-4 justify-center">
+      <a th:href="@{/login}" href="/login" class="px-6 py-3 bg-sky-600 text-white rounded hover:bg-sky-700 transition">Entrar</a>
+      <a th:href="@{/register}" href="/register" class="px-6 py-3 border border-sky-600 text-sky-600 rounded hover:bg-sky-50 transition">Criar conta</a>
+    </div>
+
+    <p class="text-sm text-gray-500 mt-6">© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}">2025</span> Oficina3D</p>
+  </div>
+</body>
+</html>

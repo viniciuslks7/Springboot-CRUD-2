@@ -1,0 +1,13 @@
+{
+  "name": "oficina3d",
+  "version": "1.0.0",
+  "description": "Oficina3D Spring Boot Application",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "daisyui": "^4.12.0"
+  }
+}

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastro - Oficina3D</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
+  <script src="https://unpkg.com/flowbite@1.7.0/dist/flowbite.js"></script>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
+    <h2 class="text-2xl font-bold text-sky-600 mb-6 text-center">Criar Conta â€” Oficina3D</h2>
+
+    <form th:action="@{/register}" method="post" class="space-y-4">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Nome completo</label>
+        <input name="fullName" required class="w-full px-3 py-2 border rounded focus:outline-none" placeholder="Seu nome completo" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">UsuÃ¡rio</label>
+        <input name="username" required class="w-full px-3 py-2 border rounded focus:outline-none" placeholder="nome_de_usuario" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input name="email" type="email" required class="w-full px-3 py-2 border rounded focus:outline-none" placeholder="seu@exemplo.com" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Senha</label>
+          <input name="password" type="password" required minlength="6" class="w-full px-3 py-2 border rounded focus:outline-none" placeholder="Senha" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Confirmar senha</label>
+          <input name="confirmPassword" type="password" required minlength="6" class="w-full px-3 py-2 border rounded focus:outline-none" placeholder="Repita a senha" />
+        </div>
+      </div>
+
+      <button type="submit" class="w-full py-2 bg-sky-600 text-white rounded hover:bg-sky-700 transition">Criar conta</button>
+    </form>
+
+    <p class="text-center text-sm text-gray-600 mt-6">JÃ¡ tem conta? <a th:href="@{/login}" class="text-sky-600 font-medium">Entrar</a></p>
+  </div>
+</body>
+</html>

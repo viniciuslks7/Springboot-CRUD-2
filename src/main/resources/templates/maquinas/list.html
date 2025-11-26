@@ -1,0 +1,56 @@
+﻿<!-- expects: maquinas (List<Maquina>), oficinas (List<Oficina>) -->
+<div th:fragment="content">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold text-secondary">Máquinas</h1>
+    <a th:href="@{/maquinas/new}" class="btn btn-secondary">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Nova Máquina
+    </a>
+  </div>
+
+  <!-- Lista -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div th:each="maquina : ${maquinas}" class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-secondary" th:text="${maquina.modelo}">Laser Cutter 2000</h2>
+        <p class="text-base-content/70" th:text="${maquina.oficina != null ? 'Oficina: ' + (maquina.oficina.nome != null ? maquina.oficina.nome : maquina.oficina.local) : 'Sem oficina'}">Oficina Central</p>
+        <div class="card-actions justify-between items-center mt-4">
+          <div th:class="'badge ' + (${maquina.status == 'ATIVA'} ? 'badge-success' : (${maquina.status == 'MANUTENCAO'} ? 'badge-warning' : 'badge-error'))"
+               th:text="${maquina.status}">ATIVA</div>
+          <div class="flex gap-2">
+            <a th:href="@{|/maquinas/edit/${maquina.id}|}" class="btn btn-sm btn-primary">Editar</a>
+            <a th:href="@{|/maquinas/delete/${maquina.id}|}"
+               onclick="return confirm('Confirma exclusão?');"
+               class="btn btn-sm btn-error">Excluir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(maquinas)}" class="col-span-full">
+      <div class="hero bg-base-200 rounded-box">
+        <div class="hero-content text-center">
+          <div class="max-w-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+            <h1 class="text-2xl font-bold">Nenhuma máquina encontrada</h1>
+            <p class="py-4 text-base-content/70">Comece criando sua primeira máquina</p>
+            <a th:href="@{/maquinas/new}" class="btn btn-secondary">Criar primeira máquina</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <a th:href="@{/home}" class="btn btn-outline">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Voltar ao Dashboard
+    </a>
+  </div>
+</div>

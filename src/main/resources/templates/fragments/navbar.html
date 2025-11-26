@@ -1,0 +1,27 @@
+<nav th:fragment="navbar" class="bg-white border-b sticky top-0 z-40">
+  <div class="page-container px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a th:href="@{/}" class="text-2xl font-bold text-sky-600">Oficina3D <span class="text-gray-400 text-sm">Vinicius</span></a>
+      <div class="hidden md:flex items-center gap-2 ml-6">
+        <a th:href="@{/oficinas}" class="px-3 py-1 rounded hover:bg-sky-50">Oficinas</a>
+        <a th:href="@{/maquinas}" class="px-3 py-1 rounded hover:bg-sky-50">Máquinas</a>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <form th:action="@{/search}" method="get" class="hidden sm:flex items-center">
+        <input name="q" type="search" placeholder="Pesquisar..." class="px-3 py-1 border rounded-l focus:outline-none" />
+        <button type="submit" class="px-3 py-1 bg-sky-500 text-white rounded-r">Buscar</button>
+      </form>
+
+      <!-- Auth links (Spring Security will replace based on session) -->
+      <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}" class="px-3 py-1 border rounded">Entrar</a>
+      </div>
+      <div sec:authorize="isAuthenticated()">
+        <span class="px-3 py-1 text-sm text-gray-600">Olá, <b sec:authentication="name">User</b></span>
+        <a th:href="@{/logout}" class="px-3 py-1 border rounded bg-red-50">Sair</a>
+      </div>
+    </div>
+  </div>
+</nav>

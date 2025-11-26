@@ -1,0 +1,21 @@
+<th:block th:fragment="head">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title th:text="${pageTitle != null ? pageTitle : 'Oficina3D'}">Oficina3D</title>
+
+  <!-- Local Tailwind CSS with DaisyUI -->
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+
+  <!-- Flowbite (components) -->
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
+  <script src="https://unpkg.com/flowbite@1.7.0/dist/flowbite.js"></script>
+
+  <!-- Optional: Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+  <!-- Custom small tweaks -->
+  <style>
+    /* pequeno tweak para container max width */
+    .page-container { max-width: 1100px; margin-left: auto; margin-right: auto; }
+  </style>
+</th:block>

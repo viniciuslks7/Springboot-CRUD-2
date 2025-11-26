@@ -1,0 +1,60 @@
+﻿<!-- expects: oficina (Oficina), actionUrl (String) -->
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+  <div th:replace="fragments/navbar :: navbar"></div>
+  <main class="page-container px-4 py-6">
+    <div th:fragment="content">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold text-primary" th:text="${oficina.id != null} ? 'Editar Oficina' : 'Nova Oficina'">Form Oficina</h1>
+    <a th:href="@{/oficinas}" class="btn btn-outline">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Voltar
+    </a>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl max-w-2xl">
+    <div class="card-body">
+      <form th:action="@{/oficinas}" th:object="${oficina}" method="post">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Nome da Oficina</span>
+          </label>
+          <input type="text" th:field="*{nome}" placeholder="Ex: Oficina Central" class="input input-bordered input-primary" required />
+          <p th:if="${#fields.hasErrors('nome')}" class="text-error text-sm mt-1" th:errors="*{nome}">Erro</p>
+        </div>
+
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text font-semibold">Localização</span>
+          </label>
+          <input type="text" th:field="*{local}" placeholder="Ex: Rua A, 123 - São Paulo, SP" class="input input-bordered" />
+          <p th:if="${#fields.hasErrors('local')}" class="text-error text-sm mt-1" th:errors="*{local}">Erro</p>
+        </div>
+
+        <div class="form-control mt-6">
+          <div class="flex gap-4 justify-end">
+            <button type="submit" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Salvar
+            </button>
+            <a th:href="@{/oficinas}" class="btn btn-outline">Cancelar</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+    </div>
+  </main>
+  <footer class="bg-white border-t mt-8">
+    <div class="page-container px-4 py-4 text-sm text-gray-500">
+      &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Oficina3D — Vinicius
+    </div>
+  </footer>
+</body>
+</html>

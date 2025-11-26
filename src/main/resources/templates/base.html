@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/head :: head">
+    <title th:fragment="title">Oficina3D</title>
+  </head>
+  <body class="bg-gray-50 min-h-screen text-gray-800">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main class="page-container px-4 py-6">
+      <!-- Oficinas page -->
+      <div th:if="${#request.requestURI.contains('/oficinas')}" th:replace="oficinas/list :: content"></div>
+      <!-- Maquinas page -->
+      <div th:if="${#request.requestURI.contains('/maquinas')}" th:replace="maquinas/list :: content"></div>
+      <!-- Fallback for other pages -->
+      <div th:unless="${#request.requestURI.contains('/oficinas') or #request.requestURI.contains('/maquinas')}" th:replace="~{${content}}"></div>
+    </main>
+
+    <footer class="bg-white border-t mt-8">
+      <div class="page-container px-4 py-4 text-sm text-gray-500">
+        &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Oficina3D — Vinicius
+      </div>
+    </footer>
+
+    <!-- Flowbite scripts already included in head; Tailwind is loaded via CDN script -->
+  </body>
+</html>
