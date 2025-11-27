@@ -28,7 +28,7 @@ public class MaquinaController {
             model.addAttribute("maquinas", maquinaService.findAll());
         }
         model.addAttribute("oficinas", oficinaService.findAll());
-        model.addAttribute("content", "maquinas/list.html :: content");
+        model.addAttribute("content", "maquinas/list :: content");
         return "base";
     }
 
@@ -36,7 +36,7 @@ public class MaquinaController {
     public String form(Model model) {
         model.addAttribute("maquina", new Maquina());
         model.addAttribute("oficinas", oficinaService.findAll());
-        model.addAttribute("content", "maquinas/form.html :: content");
+        model.addAttribute("content", "maquinas/form :: content");
         return "base";
     }
 
@@ -50,7 +50,7 @@ public class MaquinaController {
     public String edit(@PathVariable Long id, Model model) {
         maquinaService.findById(id).ifPresent(m -> model.addAttribute("maquina", m));
         model.addAttribute("oficinas", oficinaService.findAll());
-        model.addAttribute("content", "maquinas/form.html :: content");
+        model.addAttribute("content", "maquinas/form :: content");
         return "base";
     }
 

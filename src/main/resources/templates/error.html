@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Erro</title>
+</head>
+<body>
+    <h1>Erro</h1>
+    <p th:text="${error}">Erro desconhecido</p>
+    <p th:text="${message}">Mensagem</p>
+    <pre th:text="${trace}">Stack trace</pre>
+</body>
+</html>

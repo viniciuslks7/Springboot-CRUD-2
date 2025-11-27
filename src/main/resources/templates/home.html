@@ -1,131 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head"></head>
-<body>
+
+<body class="bg-gray-50 min-h-screen text-gray-800">
+
+  <!-- Navbar -->
   <div th:replace="fragments/navbar :: navbar"></div>
+
   <main class="page-container px-4 py-6">
-    <!-- Main Content -->
+
     <div class="container mx-auto p-6">
-    <div class="hero bg-base-100 rounded-box mb-6">
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <h1 class="text-5xl font-bold text-primary">Bem-vindo à Oficina3D</h1>
-          <p class="py-6">Gerencie suas oficinas e máquinas de forma eficiente</p>
-          <div class="flex gap-4 justify-center">
-            <a th:href="@{/oficinas/new}" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-              Nova Oficina
-            </a>
-            <a th:href="@{/maquinas/new}" class="btn btn-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-              Nova Máquina
-            </a>
+
+      <!-- HERO -->
+      <div class="hero bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-box mb-6 shadow-lg">
+        <div class="hero-content text-center">
+          <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Bem-vindo à Oficina3D</h1>
+            <p class="py-6 text-blue-100">Gerencie suas oficinas e máquinas de forma eficiente</p>
+
+            <div class="flex gap-4 justify-center">
+              <a th:href="@{/oficinas/new}" class="btn btn-outline btn-light hover:bg-white hover:text-blue-600">Nova Oficina</a>
+              <a th:href="@{/maquinas/new}" class="btn btn-outline btn-light hover:bg-white hover:text-purple-600">Nova Máquina</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-      <div class="card bg-primary text-primary-content">
-        <div class="card-body">
-          <h2 class="card-title">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-            Oficinas
-          </h2>
-          <p class="text-3xl font-bold" th:text="${oficinas != null ? #lists.size(oficinas) : 0}">0</p>
-        </div>
-      </div>
+      <!-- STATS CARDS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 
-      <div class="card bg-secondary text-secondary-content">
-        <div class="card-body">
-          <h2 class="card-title">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-            </svg>
-            Máquinas
-          </h2>
-          <p class="text-3xl font-bold" th:text="${maquinas != null ? #lists.size(maquinas) : 0}">0</p>
-        </div>
-      </div>
-
-      <div class="card bg-accent text-accent-content">
-        <div class="card-body">
-          <h2 class="card-title">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            Ativas
-          </h2>
-          <p class="text-3xl font-bold" th:text="${maquinas != null ? #lists.size(maquinas.?[status != null and status == 'ATIVA']) : 0}">0</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recent Oficinas -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-            Oficinas Recentes
-          </h2>
-          <div class="space-y-3">
-            <div th:each="oficina : ${oficinas}" th:if="${oficinaStat.index < 5}" class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
+        <!-- Oficinas -->
+        <div class="card bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center justify-between">
               <div>
-                <h3 class="font-semibold" th:text="${oficina.nome}">Oficina Central</h3>
-                <p class="text-sm text-base-content/70" th:text="${oficina.local}">São Paulo, SP</p>
+                <h2 class="card-title text-white">Oficinas</h2>
+                <p class="text-3xl font-bold"
+                   th:text="${oficinas != null ? #lists.size(oficinas) : 0}">0</p>
               </div>
-              <div class="badge badge-primary" th:text="${(oficina.maquinas != null ? #lists.size(oficina.maquinas) : 0) + ' máquinas'}">3 máquinas</div>
-            </div>
-            <div th:if="${#lists.isEmpty(oficinas)}" class="text-center py-8 text-base-content/50">
-              <p>Nenhuma oficina cadastrada ainda.</p>
-              <a th:href="@{/oficinas/new}" class="btn btn-primary btn-sm mt-2">Criar primeira oficina</a>
+              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
             </div>
           </div>
         </div>
+
+        <!-- Máquinas -->
+        <div class="card bg-gradient-to-br from-green-500 to-green-600 text-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="card-title text-white">Máquinas</h2>
+                <p class="text-3xl font-bold"
+                   th:text="${maquinas != null ? #lists.size(maquinas) : 0}">0</p>
+              </div>
+              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ativas -->
+        <div class="card bg-gradient-to-br from-yellow-500 to-orange-500 text-white shadow-xl hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="card-title text-white">Ativas</h2>
+                <p class="text-3xl font-bold"
+                   th:text="${maquinas != null ? #lists.size(maquinas.?[status != null and status == 'ATIVA']) : 0}">
+                  0
+                </p>
+              </div>
+              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Recent Máquinas -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title text-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-            </svg>
-            Máquinas Recentes
-          </h2>
-          <div class="space-y-3">
-            <div th:each="maquina : ${maquinas}" th:if="${maquinaStat.index < 5}" class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
-              <div>
-                <h3 class="font-semibold" th:text="${maquina.modelo}">Laser Cutter 2000</h3>
-                <p class="text-sm text-base-content/70" th:text="${maquina.oficina != null ? maquina.oficina.nome : 'Sem oficina'}">Oficina Central</p>
+      <!-- LISTAGEM RECENTE -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- OFICINAS RECENTES -->
+        <div class="card bg-white shadow-xl border border-gray-200 hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <h2 class="card-title text-blue-600 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
+              Oficinas Recentes
+            </h2>
+
+            <div class="space-y-3">
+
+              <!-- Loop com status variable -->
+              <div th:each="oficina, oficinaStat : ${oficinas}"
+                   th:if="${oficinaStat.index < 5}"
+                   class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+
+                <div>
+                  <h3 class="font-semibold text-gray-800" th:text="${oficina.nome}">Oficina Central</h3>
+                  <p class="text-sm text-gray-600" th:text="${oficina.local}">Local</p>
+                </div>
+
+                <div class="badge badge-primary"
+                     th:text="${oficina.maquinas != null ? #lists.size(oficina.maquinas) : 0} + ' máquinas'">
+                  0 máquinas
+                </div>
               </div>
-              <div th:class="'badge ' + (${maquina != null && maquina.status != null && maquina.status.equals('ATIVA')} ? 'badge-success' : (${maquina != null && maquina.status != null && maquina.status.equals('MANUTENCAO')} ? 'badge-warning' : 'badge-error'))"
-                   th:text="${maquina != null ? maquina.status : 'DESCONHECIDA'}">ATIVA</div>
-            </div>
-            <div th:if="${#lists.isEmpty(maquinas)}" class="text-center py-8 text-base-content/50">
-              <p>Nenhuma máquina cadastrada ainda.</p>
-              <a th:href="@{/maquinas/new}" class="btn btn-secondary btn-sm mt-2">Criar primeira máquina</a>
+
+              <!-- Sem oficinas -->
+              <div th:if="${#lists.isEmpty(oficinas)}"
+                   class="text-center py-8 text-gray-400">
+                <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                </svg>
+                <p>Nenhuma oficina cadastrada ainda.</p>
+                <a th:href="@{/oficinas/new}" class="btn btn-primary btn-sm mt-2">Criar primeira oficina</a>
+              </div>
+
             </div>
           </div>
         </div>
+
+        <!-- MÁQUINAS RECENTES -->
+        <div class="card bg-white shadow-xl border border-gray-200 hover:shadow-2xl transition-shadow">
+          <div class="card-body">
+            <h2 class="card-title text-green-600 flex items-center">
+              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+              </svg>
+              Máquinas Recentes
+            </h2>
+
+            <div class="space-y-3">
+
+              <div th:each="maquina, maquinaStat : ${maquinas}"
+                   th:if="${maquinaStat.index < 5}"
+                   class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+
+                <div>
+                  <h3 class="font-semibold text-gray-800" th:text="${maquina.modelo}">
+                    Modelo
+                  </h3>
+
+                  <p class="text-sm text-gray-600"
+                     th:text="${maquina.oficina != null ? maquina.oficina.nome : 'Sem oficina'}">
+                    Oficina
+                  </p>
+                </div>
+
+                <!-- Badge / status CLASS fix -->
+                <div th:class="'badge ' +
+                        (maquina != null and maquina.status != null and maquina.status == 'ATIVA'
+                          ? 'badge-success'
+                          : (maquina != null and maquina.status != null and maquina.status == 'MANUTENCAO'
+                              ? 'badge-warning'
+                              : 'badge-error'))"
+                     th:text="${maquina != null ? maquina.status : 'DESCONHECIDA'}">
+                  ATIVA
+                </div>
+
+              </div>
+
+              <!-- Sem máquinas -->
+              <div th:if="${#lists.isEmpty(maquinas)}"
+                   class="text-center py-8 text-gray-400">
+                <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+                </svg>
+                <p>Nenhuma máquina cadastrada ainda.</p>
+                <a th:href="@{/maquinas/new}" class="btn btn-secondary btn-sm mt-2">Criar primeira máquina</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
-    </div>
+
   </main>
+
+  <!-- FOOTER -->
   <footer class="bg-white border-t mt-8">
     <div class="page-container px-4 py-4 text-sm text-gray-500">
-      &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Oficina3D — Vinicius
+      &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span>
+      Oficina3D — Vinicius
     </div>
   </footer>
+
 </body>
 </html>

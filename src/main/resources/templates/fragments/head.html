@@ -1,21 +1,16 @@
-<th:block th:fragment="head">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title th:text="${pageTitle != null ? pageTitle : 'Oficina3D'}">Oficina3D</title>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Usa 'title' como texto; se não existir, fallback para 'Oficina3D' -->
+    <title th:text="${title != null ? title : 'Oficina3D'}">Oficina3D</title>
 
-  <!-- Local Tailwind CSS with DaisyUI -->
-  <link rel="stylesheet" th:href="@{/css/output.css}" />
-
-  <!-- Flowbite (components) -->
-  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
-  <script src="https://unpkg.com/flowbite@1.7.0/dist/flowbite.js"></script>
-
-  <!-- Optional: Icons -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-
-  <!-- Custom small tweaks -->
-  <style>
-    /* pequeno tweak para container max width */
-    .page-container { max-width: 1100px; margin-left: auto; margin-right: auto; }
-  </style>
-</th:block>
+    <!-- Ex.: links/estilos (ajuste conforme seu setup) -->
+    <!-- Tailwind/Flowbite CDN, seu CSS/JS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" />
+    <script src="https://unpkg.com/flowbite@1.7.0/dist/flowbite.js"></script>
+  </head>
+</html>

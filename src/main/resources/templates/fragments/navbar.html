@@ -1,27 +1,53 @@
-<nav th:fragment="navbar" class="bg-white border-b sticky top-0 z-40">
-  <div class="page-container px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <a th:href="@{/}" class="text-2xl font-bold text-sky-600">Oficina3D <span class="text-gray-400 text-sm">Vinicius</span></a>
-      <div class="hidden md:flex items-center gap-2 ml-6">
-        <a th:href="@{/oficinas}" class="px-3 py-1 rounded hover:bg-sky-50">Oficinas</a>
-        <a th:href="@{/maquinas}" class="px-3 py-1 rounded hover:bg-sky-50">Máquinas</a>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body th:fragment="navbar">
+    <nav class="navbar bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+      <div class="navbar-start">
+        <a th:href="@{/}" class="btn btn-ghost normal-case text-xl font-bold text-white hover:bg-white hover:text-blue-600 transition-colors">
+          <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+          </svg>
+          Oficina3D
+        </a>
       </div>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <form th:action="@{/search}" method="get" class="hidden sm:flex items-center">
-        <input name="q" type="search" placeholder="Pesquisar..." class="px-3 py-1 border rounded-l focus:outline-none" />
-        <button type="submit" class="px-3 py-1 bg-sky-500 text-white rounded-r">Buscar</button>
-      </form>
-
-      <!-- Auth links (Spring Security will replace based on session) -->
-      <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{/login}" class="px-3 py-1 border rounded">Entrar</a>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li>
+            <a th:href="@{/home}" class="text-white hover:bg-white hover:text-blue-600 transition-colors rounded-lg px-4 py-2">
+              <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/oficinas}" class="text-white hover:bg-white hover:text-blue-600 transition-colors rounded-lg px-4 py-2">
+              <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
+              Oficinas
+            </a>
+          </li>
+          <li>
+            <a th:href="@{/maquinas}" class="text-white hover:bg-white hover:text-blue-600 transition-colors rounded-lg px-4 py-2">
+              <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+              </svg>
+              Máquinas
+            </a>
+          </li>
+        </ul>
       </div>
-      <div sec:authorize="isAuthenticated()">
-        <span class="px-3 py-1 text-sm text-gray-600">Olá, <b sec:authentication="name">User</b></span>
-        <a th:href="@{/logout}" class="px-3 py-1 border rounded bg-red-50">Sair</a>
+      <div class="navbar-end">
+        <form th:action="@{/logout}" method="post" class="inline">
+          <button type="submit" class="btn btn-ghost text-white hover:bg-red-500 hover:text-white transition-colors">
+            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+            </svg>
+            Logout
+          </button>
+        </form>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
+  </body>
+</html>

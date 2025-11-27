@@ -10,7 +10,7 @@ public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @GetMapping({"/login"})
+    @GetMapping({"/", "/login"})
     public String loginPage() {
         log.info("âž¡ï¸  Entrou no GET /login");
         return "login";

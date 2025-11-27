@@ -1,26 +1,23 @@
-<!doctype html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/head :: head">
-    <title th:fragment="title">Oficina3D</title>
-  </head>
-  <body class="bg-gray-50 min-h-screen text-gray-800">
-    <div th:replace="fragments/navbar :: navbar"></div>
-
-    <main class="page-container px-4 py-6">
-      <!-- Oficinas page -->
-      <div th:if="${#request.requestURI.contains('/oficinas')}" th:replace="oficinas/list :: content"></div>
-      <!-- Maquinas page -->
-      <div th:if="${#request.requestURI.contains('/maquinas')}" th:replace="maquinas/list :: content"></div>
-      <!-- Fallback for other pages -->
-      <div th:unless="${#request.requestURI.contains('/oficinas') or #request.requestURI.contains('/maquinas')}" th:replace="~{${content}}"></div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} ?: 'Oficina 3D'">Oficina 3D</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-4 py-8">
+        <div th:replace="${content}"></div>
     </main>
-
-    <footer class="bg-white border-t mt-8">
-      <div class="page-container px-4 py-4 text-sm text-gray-500">
-        &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Oficina3D — Vinicius
-      </div>
+    
+    <!-- Footer (opcional) -->
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p>&copy; 2024 Oficina 3D. Todos os direitos reservados.</p>
     </footer>
-
-    <!-- Flowbite scripts already included in head; Tailwind is loaded via CDN script -->
-  </body>
+</body>
 </html>
