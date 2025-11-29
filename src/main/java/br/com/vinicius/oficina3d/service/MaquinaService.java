@@ -19,6 +19,7 @@ public class MaquinaService {
     public List<Maquina> findAll() { return repo.findAll(); }
     public Optional<Maquina> findById(Long id) { return repo.findById(id); }
     public List<Maquina> findByOficinaId(Long oficinaId) { return repo.findByOficinaId(oficinaId); }
+    public List<Maquina> findByUserId(Long userId) { return repo.findByUserId(userId); }
     public Maquina save(Maquina m) { return repo.save(m); }
     public void deleteById(Long id) { repo.deleteById(id); }
 }

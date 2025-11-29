@@ -4,6 +4,7 @@ import br.com.vinicius.oficina3d.model.Maquina;
 import br.com.vinicius.oficina3d.model.Oficina;
 import br.com.vinicius.oficina3d.service.MaquinaService;
 import br.com.vinicius.oficina3d.service.OficinaService;
+import br.com.vinicius.oficina3d.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,28 +21,24 @@ public class HomeController {
 
     private final OficinaService oficinaService;
     private final MaquinaService maquinaService;
+    private final UserService userService;
 
-    public HomeController(OficinaService oficinaService, MaquinaService maquinaService) {
+    public HomeController(OficinaService oficinaService, MaquinaService maquinaService, UserService userService) {
         this.oficinaService = oficinaService;
         this.maquinaService = maquinaService;
+        this.userService = userService;
     }
 
     @GetMapping({"/home"})
     public String home(Model model) {
-        List<Oficina> oficinas = oficinaService.findAll();
-        List<Maquina> maquinas = maquinaService.findAll();
+        String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+        br.com.vinicius.oficina3d.model.User user = userService.findByUsername(username).orElse(null);
+        List<Oficina> oficinas = (user != null) ? oficinaService.findByUserId(user.getId()) : Collections.emptyList();
+        List<Maquina> maquinas = (user != null) ? maquinaService.findByUserId(user.getId()) : Collections.emptyList();
 
-        if (oficinas == null) oficinas = Collections.emptyList();
-        if (maquinas == null) maquinas = Collections.emptyList();
-
-        model.addAttribute("title", "Dashboard — Oficina3D"); // usado pelo fragments/head
+        model.addAttribute("title", "Dashboard — Oficina3D");
         model.addAttribute("oficinas", oficinas);
         model.addAttribute("maquinas", maquinas);
-
-        // se usa base.html com content dinâmico, poderia ser:
-        // model.addAttribute("content", "home :: content");
-        // return "base";
-        // Mas como seu home.html é standalone, só retorne "home"
         return "home";
     }
 }

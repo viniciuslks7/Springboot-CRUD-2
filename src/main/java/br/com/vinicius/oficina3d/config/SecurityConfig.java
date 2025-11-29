@@ -36,26 +36,38 @@ public class SecurityConfig {
                 .ignoringRequestMatchers("/h2-console/**")
             )
             .authorizeHttpRequests(auth -> auth
+                // Rotas públicas (sem autenticação necessária)
                 .requestMatchers(
-                    "/", "/index",
-                    "/login", "/register",
-                    "/css/**", "/js/**", "/img/**",
-                    "/webjars/**"
+                    "/",                    // Página inicial
+                    "/index",               // Página inicial alternativa
+                    "/login",               // Página de login
+                    "/register",            // Página de cadastro
+                    "/css/**",              // Arquivos CSS
+                    "/js/**",               // Arquivos JavaScript
+                    "/img/**",              // Imagens
+                    "/images/**",           // Imagens alternativa
+                    "/webjars/**",          // Bibliotecas web (se usar)
+                    "/error"                // Página de erro
                 ).permitAll()
+                // Todas as outras rotas precisam autenticação
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home", true)
+                .loginPage("/login")                    // Página customizada de login
+                .loginProcessingUrl("/login")           // URL que processa o login
+                .defaultSuccessUrl("/home", true)       // Redireciona para /home após login
+                .failureUrl("/login?error=true")        // Redireciona para login com erro
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutUrl("/logout")                   // URL de logout
+                .logoutSuccessUrl("/login?logout")      // Redireciona após logout
+                .invalidateHttpSession(true)            // Invalida a sessão
+                .deleteCookies("JSESSIONID")            // Remove cookies
                 .permitAll()
             )
             .userDetailsService(userDetailsService);
+            
         return http.build();
     }
 }

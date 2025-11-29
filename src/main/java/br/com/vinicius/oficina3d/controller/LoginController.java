@@ -10,9 +10,23 @@ public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @GetMapping({"/", "/login"})
+    // Página inicial (index)
+    @GetMapping("/")
+    public String index() {
+        log.info("➡️  Acessando página inicial (index)");
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String indexAlternative() {
+        log.info("➡️  Acessando /index");
+        return "index";
+    }
+
+    // Página de login
+    @GetMapping("/login")
     public String loginPage() {
-        log.info("âž¡ï¸  Entrou no GET /login");
+        log.info("➡️  Acessando página de login");
         return "login";
     }
 }

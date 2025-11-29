@@ -21,6 +21,10 @@ public class Maquina {
     @JoinColumn(name = "oficina_id")
     private Oficina oficina;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Maquina() {}
 
     public Maquina(String modelo, String status) {
@@ -39,4 +43,7 @@ public class Maquina {
 
     public Oficina getOficina() { return oficina; }
     public void setOficina(Oficina oficina) { this.oficina = oficina; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

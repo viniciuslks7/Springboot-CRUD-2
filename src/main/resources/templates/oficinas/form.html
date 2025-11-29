@@ -2,48 +2,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head"></head>
-<body>
+<body class="flex flex-col min-h-screen bg-gray-50">
   <div th:replace="fragments/navbar :: navbar"></div>
-  <main class="page-container px-4 py-6">
+  <main class="page-container px-4 py-6 bg-white rounded-xl shadow-md flex-1">
     <div th:fragment="content">
   <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold text-primary" th:text="${oficina.id != null} ? 'Editar Oficina' : 'Nova Oficina'">Form Oficina</h1>
-    <a th:href="@{/oficinas}" class="btn btn-outline">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-400 flex items-center gap-2" th:text="${oficina.id != null} ? 'Editar Oficina' : 'Nova Oficina'">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3m-4 0v4a1 1 0 001 1h3m-7 0v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3" />
+        </svg>
+      </h1>
+    <a th:href="@{/oficinas}" class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-400 hover:from-blue-700 hover:to-pink-600 text-white font-bold py-2 px-5 rounded-lg shadow transition flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
       Voltar
     </a>
   </div>
 
-  <div class="card bg-base-100 shadow-xl max-w-2xl">
+  <div class="card bg-white shadow-2xl border border-gray-200 max-w-2xl">
     <div class="card-body">
       <form th:action="@{/oficinas}" th:object="${oficina}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <div class="form-control">
           <label class="label">
-            <span class="label-text font-semibold">Nome da Oficina</span>
+            <span class="label-text font-semibold text-blue-700">Nome da Oficina</span>
           </label>
-          <input type="text" th:field="*{nome}" placeholder="Ex: Oficina Central" class="input input-bordered input-primary" required />
+          <input type="text" th:field="*{nome}" placeholder="Ex: Oficina Central" class="input input-bordered border-2 border-blue-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-300" required />
           <p th:if="${#fields.hasErrors('nome')}" class="text-error text-sm mt-1" th:errors="*{nome}">Erro</p>
         </div>
 
         <div class="form-control mt-4">
           <label class="label">
-            <span class="label-text font-semibold">Localização</span>
+            <span class="label-text font-semibold text-purple-700">Localização</span>
           </label>
-          <input type="text" th:field="*{local}" placeholder="Ex: Rua A, 123 - São Paulo, SP" class="input input-bordered" />
+          <input type="text" th:field="*{local}" placeholder="Ex: Rua A, 123 - São Paulo, SP" class="input input-bordered border-2 border-purple-400 focus:border-pink-500 focus:ring-2 focus:ring-pink-300" />
           <p th:if="${#fields.hasErrors('local')}" class="text-error text-sm mt-1" th:errors="*{local}">Erro</p>
         </div>
 
         <div class="form-control mt-6">
           <div class="flex gap-4 justify-end">
-            <button type="submit" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button type="submit" class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-400 hover:from-blue-700 hover:to-pink-600 text-white font-bold py-2 px-5 rounded-lg shadow transition flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               Salvar
             </button>
-            <a th:href="@{/oficinas}" class="btn btn-outline">Cancelar</a>
+            <a th:href="@{/oficinas}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-5 rounded-lg shadow transition flex items-center gap-2">Cancelar</a>
           </div>
         </div>
       </form>
@@ -52,7 +57,7 @@
     </div>
   </main>
   <footer class="bg-white border-t mt-8">
-    <div class="page-container px-4 py-4 text-sm text-gray-500">
+    <div class="page-container px-4 py-4 text-sm text-gray-500 text-center">
       &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> Oficina3D — Vinicius
     </div>
   </footer>

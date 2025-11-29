@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OficinaRepository extends JpaRepository<Oficina, Long> {
+	java.util.List<Oficina> findByUserId(Long userId);
 }

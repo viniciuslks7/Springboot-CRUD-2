@@ -17,7 +17,17 @@ public class OficinaService {
     }
 
     public List<Oficina> findAll() { return repo.findAll(); }
+    public List<Oficina> findByUserId(Long userId) { return repo.findByUserId(userId); }
     public Optional<Oficina> findById(Long id) { return repo.findById(id); }
-    public Oficina save(Oficina o) { return repo.save(o); }
+    public Oficina save(Oficina o) { 
+        if (o.getId() != null) {
+            // Se é uma edição, preservar as máquinas existentes
+            Optional<Oficina> existing = repo.findById(o.getId());
+            if (existing.isPresent()) {
+                o.setMaquinas(existing.get().getMaquinas());
+            }
+        }
+        return repo.save(o); 
+    }
     public void deleteById(Long id) { repo.deleteById(id); }
 }

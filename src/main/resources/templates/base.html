@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title} ?: 'Oficina 3D'">Oficina 3D</title>
     <link rel="stylesheet" th:href="@{/css/output.css}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.7.0/dist/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" />
 </head>
 <body class="bg-gray-100">
     <!-- Navbar -->
@@ -12,12 +17,17 @@
     
     <!-- Conteúdo Principal -->
     <main class="container mx-auto px-4 py-8">
-        <div th:replace="${content}"></div>
+        <!-- Conteúdo será inserido aqui -->
+        <th:block layout:fragment="content">
+            <p>Conteúdo padrão</p>
+        </th:block>
     </main>
     
     <!-- Footer (opcional) -->
     <footer class="bg-gray-800 text-white text-center py-4 mt-8">
         <p>&copy; 2024 Oficina 3D. Todos os direitos reservados.</p>
     </footer>
+    
+    <script src="https://unpkg.com/flowbite@1.7.0/dist/flowbite.js"></script>
 </body>
 </html>

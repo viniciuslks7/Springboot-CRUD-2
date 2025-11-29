@@ -22,6 +22,10 @@ public class Oficina {
     @OneToMany(mappedBy = "oficina", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Maquina> maquinas = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Oficina() {}
 
     public Oficina(String nome, String local) {
@@ -37,6 +41,9 @@ public class Oficina {
 
     public String getLocal() { return local; }
     public void setLocal(String local) { this.local = local; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public List<Maquina> getMaquinas() { return maquinas; }
     public void setMaquinas(List<Maquina> maquinas) { this.maquinas = maquinas; }

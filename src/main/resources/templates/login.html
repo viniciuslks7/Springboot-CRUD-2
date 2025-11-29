@@ -12,17 +12,17 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
     <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
-        <h1 class="text-3xl font-bold text-center text-sky-600 mb-6">Oficina3D â€” Login</h1>
+        <h1 class="text-3xl font-bold text-center text-sky-600 mb-6">Oficina3D — Login</h1>
 
-        <div th:if="${param.error}" class="mb-4 px-4 py-3 rounded bg-red-100 text-red-700 text-sm">UsuÃ¡rio ou senha incorretos.</div>
+        <div th:if="${param.error}" class="mb-4 px-4 py-3 rounded bg-red-100 text-red-700 text-sm">Usuário ou senha incorretos.</div>
         <div th:if="${param.logout}" class="mb-4 px-4 py-3 rounded bg-green-100 text-green-700 text-sm">Logout realizado com sucesso.</div>
-        <div th:if="${param.registered}" class="mb-4 px-4 py-3 rounded bg-green-50 text-green-800 text-sm">Conta criada com sucesso. FaÃ§a login.</div>
+        <div th:if="${param.registered}" class="mb-4 px-4 py-3 rounded bg-green-50 text-green-800 text-sm">Conta criada com sucesso. Faça login.</div>
 
         <form th:action="@{/login}" method="post" class="space-y-4">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div>
-                <label class="block text-sm font-medium mb-1">UsuÃ¡rio</label>
-                <input type="text" name="username" class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none" placeholder="Digite seu usuÃ¡rio" required />
+                <label class="block text-sm font-medium mb-1">Usuário</label>
+                <input type="text" name="username" class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none" placeholder="Digite seu usuário" required />
             </div>
 
             <div>
@@ -33,9 +33,9 @@
             <button type="submit" class="w-full py-2 mt-2 bg-sky-600 text-white rounded hover:bg-sky-700 transition">Entrar</button>
         </form>
 
-        <div class="text-center mt-4 text-sm text-gray-600">NÃ£o tem conta? <a th:href="@{/register}" class="text-sky-600 font-medium">Crie uma aqui</a></div>
+        <div class="text-center mt-4 text-sm text-gray-600">Não tem conta? <a th:href="@{/register}" class="text-sky-600 font-medium">Crie uma aqui</a></div>
 
-        <p class="text-center text-sm text-gray-600 mt-6">Â© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span> Oficina3D â€” Vinicius</p>
+        <p class="text-center text-sm text-gray-600 mt-6">© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span> Oficina3D — Vinicius</p>
     </div>
 
 </body>
